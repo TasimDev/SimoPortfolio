@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ProjectsShowcase } from "@/components/sections/ProjectsShowcase";
 import { siteConfig } from "@/content/site";
-import { projects } from "@/content/projects";
 import { isLocale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/get-dictionary";
+import { defaultSocialImage } from "@/lib/metadata";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -22,7 +22,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       canonical: `/${locale}/projects`,
       languages: { "bg-BG": "/bg/projects", en: "/en/projects", "x-default": "/bg/projects" },
     },
-    openGraph: { title, description: copy.description, url: `/${locale}/projects`, type: "website", images: [projects[0].image] },
+    openGraph: { title, description: copy.description, url: `/${locale}/projects`, type: "website", images: [defaultSocialImage] },
+    twitter: { card: "summary_large_image", title, description: copy.description, images: [defaultSocialImage.url] },
   };
 }
 

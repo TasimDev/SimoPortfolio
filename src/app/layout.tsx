@@ -22,5 +22,5 @@ const robotoCondensed = localFont({
   display: "swap",
 });
 
-export const metadata:Metadata={metadataBase:new URL(siteConfig.siteUrl),title:siteConfig.fullBrandName,description:siteConfig.brandDescriptor};
+export const metadata:Metadata={metadataBase:new URL(siteConfig.siteUrl),title:siteConfig.fullBrandName,description:siteConfig.brandDescriptor,icons:{icon:"/icon.png",apple:"/apple-icon.png"}};
 export default async function RootLayout({children}:{children:React.ReactNode}){const locale=(await headers()).get("x-simo-locale")==="en"?"en":"bg";return <html lang={locale} data-scroll-behavior="smooth" className={`${manrope.variable} ${robotoCondensed.variable}`}><body>{children}</body></html>}

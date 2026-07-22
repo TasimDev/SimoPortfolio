@@ -1,8 +1,13 @@
 const configuredSiteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://tasimtasimov.com";
+const deploymentHost = process.env.VERCEL_PROJECT_PRODUCTION_URL ?? process.env.VERCEL_URL;
+const assetUrl = deploymentHost
+  ? `https://${deploymentHost.replace(/^https?:\/\//, "")}`
+  : configuredSiteUrl;
 
 export const siteConfig = {
   brandName: "SIMO", brandDescriptor: "Digital Craftsman", fullBrandName: "SIMO | Digital Craftsman",
   siteUrl: configuredSiteUrl.replace(/\/$/, ""),
+  assetUrl: assetUrl.replace(/\/$/, ""),
   defaultLocale: "bg", phoneDisplay: "+359 89 272 9253", phoneHref: "tel:+359892729253",
   location: { bg: "България", en: "Bulgaria" },
   socialLinks: [

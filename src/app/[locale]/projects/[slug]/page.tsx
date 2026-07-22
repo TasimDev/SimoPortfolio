@@ -31,6 +31,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       : getLocalizedText(project.shortDescription, locale);
 
   const metadataTitle = `${title} | ${siteConfig.fullBrandName}`;
+  const socialImage = new URL(project.image, siteConfig.assetUrl).toString();
   return {
     title: metadataTitle,
     description,
@@ -43,7 +44,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         "x-default": projectRoute("bg", slug),
       },
     },
-    openGraph: { title: metadataTitle, description, url: projectRoute(locale, slug), type: "website", images: [project.image] },
+    openGraph: { title: metadataTitle, description, url: projectRoute(locale, slug), type: "website", images: [socialImage] },
+    twitter: { card: "summary_large_image", title: metadataTitle, description, images: [socialImage] },
   };
 }
 

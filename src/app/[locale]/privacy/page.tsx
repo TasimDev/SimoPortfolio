@@ -7,6 +7,7 @@ import { privacySections } from "@/content/privacy";
 import { siteConfig } from "@/content/site";
 import { getDictionary } from "@/i18n/get-dictionary";
 import { isLocale } from "@/i18n/config";
+import { defaultSocialImage } from "@/lib/metadata";
 import { routes } from "@/lib/routes";
 import { getLocalizedText } from "@/types/content";
 
@@ -25,6 +26,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       canonical: routes.privacy(locale),
       languages: { "bg-BG": routes.privacy("bg"), en: routes.privacy("en"), "x-default": routes.privacy("bg") },
     },
+    openGraph: { title, description: dictionary.privacy.intro, url: routes.privacy(locale), type: "website", images: [defaultSocialImage] },
+    twitter: { card: "summary_large_image", title, description: dictionary.privacy.intro, images: [defaultSocialImage.url] },
   };
 }
 
