@@ -1,36 +1,37 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# SIMO | Digital Craftsman
 
-## Getting Started
+Bilingual, responsive portfolio built with Next.js App Router, TypeScript, React 19, localized content and SEO. It includes the complete homepage, project index and case studies, contact form, privacy page, sitemap and responsive desktop/mobile navigation.
 
-First, run the development server:
+## Run locally
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open `http://localhost:3000` (redirects to `/bg`). Production checks: `npm run lint`, `npm run check-types`, `npm run build`, then `npm start`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Contact form delivery
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Copy `.env.example` to `.env.local` and set `RESEND_API_KEY`, `CONTACT_FROM_EMAIL`, and `CONTACT_TO_EMAIL`. The sender must use a domain verified in Resend. The form deliberately returns an unavailable-service error until all three values are configured, so enquiries are never silently discarded.
 
-## Learn More
+The confirmed production origin is `https://tasimtasimov.com`. Keep `NEXT_PUBLIC_SITE_URL` set to that HTTPS origin without a trailing slash so canonical URLs remain stable in every deployment environment.
 
-To learn more about Next.js, take a look at the following resources:
+## Structure and editing
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- `src/app/[locale]`: locale layouts/pages and metadata
+- `src/components`: layout, section, and UI components
+- `src/i18n/dictionaries`: interface, section, a11y, and SEO copy
+- `src/content`: reusable records and central site configuration
+- `src/styles/tokens.css`: visual design tokens
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+To add a translation, add the Bulgarian key first; TypeScript then requires the same English key. To add a service or project, create a stable, language-independent record in its content file with both localized values. Contact and production URL changes belong in `src/content/site.ts` (`NEXT_PUBLIC_SITE_URL` may provide the URL). SEO copy belongs in each dictionary’s `metadata` object.
 
-## Deploy on Vercel
+For a new locale, extend `locales`, add a dictionary/loader, provide localized content values, metadata alternates, sitemap entries, and language switcher support.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Launch checklist
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Set the four values from `.env.example` in the hosting environment.
+- Verify the sending domain in Resend and submit one real BG and EN enquiry.
+- Confirm that the custom domain resolves over HTTPS, then inspect `/robots.txt` and `/sitemap.xml`.
+- Run `npm run lint && npm run check-types && npm run build` before deployment.

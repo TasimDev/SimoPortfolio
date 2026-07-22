@@ -1,0 +1,2 @@
+import type { Locale } from "@/i18n/config";import type { Dictionary } from "@/i18n/dictionaries/bg";import { routes } from "@/lib/routes";
+export function StagePlaceholder({locale,dictionary,title}:{locale:Locale;dictionary:Dictionary;title:string}){return <main id="main-content" className="container empty-state"><p className="eyebrow">SIMO / 02</p><h1>{title}</h1><p>{dictionary.common.stageNotice}</p><a className="button button--primary" href={routes.home(locale)}>{dictionary.common.notFoundAction}</a></main>}
